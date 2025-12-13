@@ -1,4 +1,4 @@
-Fashion‑MNIST is a dataset of 70,000 grayscale images of clothing items, created by 
+Fashion MNIST is a dataset of 70,000 grayscale images of clothing items, created by 
 Zalando Research as a more challenging replacement for the classic MNIST digit 
 dataset.
 It is widely used for:

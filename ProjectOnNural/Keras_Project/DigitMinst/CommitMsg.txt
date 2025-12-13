@@ -1,0 +1,22 @@
+The MNIST digits dataset (Modified National Institute of Standards and Technology) is 
+one of the most iconic datasets in machine learning and computer vision. 
+
+What Is the MNIST Dataset?
+- A benchmark dataset of handwritten digits from 0 to 9.
+- Created by Yann LeCun, Corinna Cortes, and Christopher Burges by combining and 
+  refining samples from the original NIST datasets.
+- Widely used for training and testing image classification models, especially in deep learning.
+
+Dataset Structure
+Component       | Details
+----------------|-------------------------------
+Image Size      | 28 × 28 pixels (grayscale)
+Pixel Values    | 0 (white) to 255 (black)
+Training Set    | 60,000 images
+Test Set        | 10,000 images
+Format          | Each image is flattened into a 784-element vector
+
+Why Is MNIST So Popular?
+- Simple yet powerful: Great for testing basic image classification algorithms.
+- Standardized: Allows easy comparison between different models and techniques.
+- Fast to train: Small size and low complexity make it ideal for prototyping.
