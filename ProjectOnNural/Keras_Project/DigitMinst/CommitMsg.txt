@@ -20,3 +20,4 @@ Why Is MNIST So Popular?
 - Simple yet powerful: Great for testing basic image classification algorithms.
 - Standardized: Allows easy comparison between different models and techniques.
 - Fast to train: Small size and low complexity make it ideal for prototyping.
+
