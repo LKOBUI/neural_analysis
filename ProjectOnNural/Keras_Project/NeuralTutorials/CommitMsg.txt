@@ -1,0 +1,32 @@
+- Gradient Problems & Solutions
+Covers vanishing/exploding gradients and techniques to stabilize training.
+- Additional Notes on Gradient Problems
+Likely deeper insights or extended examples beyond the basics.
+- ANN Tutorials
+General tutorials on artificial neural networks, probably covering architecture, activation functions, and training.
+- Batch Normalization in Wide & Deep Networks
+Explains how batch norm improves convergence and stability in complex architectures.
+- Convolutions
+Notes on convolutional neural networks (CNNs), kernel operations, and feature extraction.
+- Dropout in Neural Networks
+Regularization technique to prevent overfitting by randomly deactivating neurons during training.
+- Keras Learn
+Practical guide or experiments using the Keras deep learning library.
+
+- Momentum & Faster Optimizations
+Techniques like momentum, Nesterov acceleration, RMSProp, Adam for speeding up convergence.
+- Non-sequential Neural Networks
+Covers functional API or graph-based models beyond simple sequential layers.
+- Regularizations
+Methods like L1/L2 penalties, dropout, early stopping to improve generalization.
+- Weight & Bias Initialization
+Strategies for initializing parameters (Xavier, He initialization) to avoid gradient issues.
+
+Interpretation
+Together, these documents form a comprehensive learning package:
+- They start with fundamentals (ANN tutorials, initialization).
+- Move into optimization techniques (momentum, gradient problems, batch norm).
+- Cover regularization (dropout, L1/L2).
+- Include advanced architectures (convolutions, non-sequential models).
+- And finish with practical Keras implementations
+

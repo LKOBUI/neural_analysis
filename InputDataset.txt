@@ -1,0 +1,33 @@
+(X_train, y_train), (X_test, y_test) = mnist.load_data()
+
+this given dataset shape => (60000, 28, 28)
+Now we need to reshape it i.e. => (-1,28*28) => (-1,784) 
+So that the actual value of X train => (60000,784)
+
+After with this you must change the classical value into one-hot i.e => y_train = to_categorical(y_train, 10)
+Before one hot y_train shape => (60000,) after that one-hot encoded shape become => (60000,10)
+
+===============================
+Change in Input data shape.
+Get the input pixel value for input layer for
+inputs = Input(shape=(28, 28, 1)) => 28x28 pixel and 1=> Gray scale image
+
+inputs.shape => (None, 28, 28, 1)
+You must have Flatten this input shape i.e you need to convert => (None, 784)
+So use this InData = Flatten()(inputs) 
+& shape of InData = (None, 784)
+================================
+Shape calculations with batch-normalizations and normalizations
+1. inputs = layers.Input(shape=(28, 28,1)) -> Nothing to change.
+2. InData = norm(inputs)  
+3. InData = Flatten()(InData) 
+================================
+layer_1 = layers.Dense()(InData)
+layer_1 = BatchNormalization()(layer_1)
+layer_2 = layers.Dense()(layer_1)
+layer_2 = BatchNormalization()(layer_2)
+layer_3 = layers.Dense()(layer_2)
+layer_3 = BatchNormalization()(layer_3)
+Please Do not apply BatchNormalization() on the final layer
+layer_out = layers.Dense()(layer_3)
+====> No batch normalizations
