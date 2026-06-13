@@ -1,4 +1,4 @@
-# 📂 Neural Analysis Repository Structure
+# Neural Analysis Methodology
 
 This project provides a modular framework for analyzing multi-electrode neural recording data, focusing on spike statistics, feature extraction, machine learning, and statistical testing.
 
