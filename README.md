@@ -1,6 +1,61 @@
-# Neural Analysis Methodology
+# Neural Analysis with Pytorch and CUDA Methodology
 
 This project provides a modular framework for analyzing multi-electrode neural recording data, focusing on spike statistics, feature extraction, machine learning, and statistical testing.
+
+
+## Table of Contents
+
+- [A). DigitMinst](#a-digitminst)
+  - [1. General Project Objectives](#1-general-project-objectives)
+  - [2. Detailed Summary of Jupyter Notebooks](#2-detailed-summary-of-jupyter-notebooks)
+    - [`DigitsMinst.ipynb` & `LearnMist.ipynb`](#digitsminstipynb-learnmistipynb)
+    - [`DigitMinstAdditionals.ipynb`](#digitminstadditionalsipynb)
+    - [`DigitMinst_AnalysisOnNeuralAndCnnArch.ipynb`](#digitminst_analysisonneuralandcnnarchipynb)
+    - [`Digit_Minst_completed.ipynb` & `MinstProjectAnalysis.ipynb`](#digit_minst_completedipynb-minstprojectanalysisipynb)
+  - [3. Mathematical Formulations Explained](#3-mathematical-formulations-explained)
+  - [4. Deep Learning Model Architectures & Selection Reasoning](#4-deep-learning-model-architectures-selection-reasoning)
+    - [Architecture A: Dense Multilayer Perceptron (ANN)](#architecture-a-dense-multilayer-perceptron-ann)
+    - [Architecture B: Convolutional Neural Network (CNN)](#architecture-b-convolutional-neural-network-cnn)
+- [B). Fashion-MNIST](#b-fashion-mnist)
+  - [1. Project Objectives & Detailed Notebook Summary](#1-project-objectives-detailed-notebook-summary)
+    - [`MinstKeras.ipynb`](#minstkerasipynb)
+  - [2. Mathematical Formulations Explained](#2-mathematical-formulations-explained)
+  - [3. Model Architecture & Selection Details](#3-model-architecture-selection-details)
+- [C. NeuralTutorials:](#c-neuraltutorials)
+  - [1. Detailed Notebook Summaries & Core Objectives](#1-detailed-notebook-summaries-core-objectives)
+    - [`ANN-tutorials.ipynb` & `Keras_Learn.ipynb`](#ann-tutorialsipynb-keras_learnipynb)
+    - [`Gradient_Problem_and_solutions.ipynb` & `AdditionalOnGrediantProblem.ipynb`](#gradient_problem_and_solutionsipynb-additionalongrediantproblemipynb)
+    - [`BatchNormWideAndDeepNetwork.ipynb`](#batchnormwideanddeepnetworkipynb)
+    - [`Convolutions.ipynb`](#convolutionsipynb)
+    - [`Dropout In neural network.ipynb` & `Regularizations.ipynb`](#dropout-in-neural-networkipynb-regularizationsipynb)
+    - [`MomentumAndFasterOptimizations.ipynb`](#momentumandfasteroptimizationsipynb)
+    - [`Non-sequential neural network.ipynb`](#non-sequential-neural-networkipynb)
+    - [`WeightAndBaisInit.ipynb`](#weightandbaisinitipynb)
+    - [`VisualEffectOnDifferentVaribles.ipynb`](#visualeffectondifferentvariblesipynb)
+  - [2. Mathematical Formulations Explained](#2-mathematical-formulations-explained-1)
+  - [3. Deep Learning Model Architectures & Selection Reasoning](#3-deep-learning-model-architectures-selection-reasoning)
+    - [Architecture 1: Wide & Deep Neural Functional Networks](#architecture-1-wide-deep-neural-functional-networks)
+    - [Architecture 2: Advanced Deep MLP with Adaptive Optimization](#architecture-2-advanced-deep-mlp-with-adaptive-optimization)
+    - [Architecture 3: Multi-Layer 2D Convolutional Networks (CNNs)](#architecture-3-multi-layer-2d-convolutional-networks-cnns)
+- [D). TensorFlowTutorials](#d-tensorflowtutorials)
+  - [1. Detailed Notebook Summaries & Core Objectives](#1-detailed-notebook-summaries-core-objectives-1)
+    - [`TensorBasic.ipynb`](#tensorbasicipynb)
+    - [`Reusing Pretrained Layers.ipynb`](#reusing-pretrained-layersipynb)
+  - [2. Mathematical Formulations Explained](#2-mathematical-formulations-explained-2)
+  - [3. Deep Learning Model Architectures & Selection Reasoning](#3-deep-learning-model-architectures-selection-reasoning-1)
+    - [Architecture 1: Core Mathematical Multi-Tensor Graph (Low-Level Baseline)](#architecture-1-core-mathematical-multi-tensor-graph-low-level-baseline)
+    - [Architecture 2: Pretrained Feature Extractor with Custom Head (Transfer Learning Setup)](#architecture-2-pretrained-feature-extractor-with-custom-head-transfer-learning-setup)
+- [E). PyTorch and CUDA — Digit MNIST Implementation](#e-pytorch-and-cuda-digit-mnist-implementation)
+  - [1. Project Objectives](#1-project-objectives)
+  - [2. Data Preparation and Tensor Shapes](#2-data-preparation-and-tensor-shapes)
+  - [3. PyTorch Model Architecture](#3-pytorch-model-architecture)
+    - [Architecture A: Dense MLP — `PytorchTensorDigitMist`](#architecture-a-dense-mlp-pytorchtensordigitmist)
+    - [Architecture B: LoRA-enabled MLP — `PytorchTensorDigitMistLoRA`](#architecture-b-lora-enabled-mlp-pytorchtensordigitmistlora)
+    - [Model factory — `TensorModels`](#model-factory-tensormodels)
+  - [4. Training, CUDA, and Numerical Utilities](#4-training-cuda-and-numerical-utilities)
+  - [5. Evaluation and Experiment Tracking](#5-evaluation-and-experiment-tracking)
+  - [6. Application and Deployment Workflow](#6-application-and-deployment-workflow)
+  - [7. Purpose of the PyTorch Addition](#7-purpose-of-the-pytorch-addition)
 
 # A). DigitMinst 
 Based on the repository architecture of the LKOBUI/neural_analysis - DigitMinst subfolder, here is the detailed technical breakdown covering the objectives, notebook summaries, mathematical formulations, and model architectures.
@@ -261,3 +316,123 @@ $$W_{\text{new\_init}} \sim N \left( 0, \sqrt{\frac{2}{n_{\text{in}}}} \right)$$
 
 *   **Details**: Utilizes a deep, pretrained backbone architecture (such as `MobileNetV2` or `ResNet50` trained on ImageNet) with its top layers removed (`include_top=False`). A new global pooling layer and a custom dense classification head are added on top.
 *   **Reasoning by Region/Intent**: Crucial for training complex visual or sequence systems when data is limited. Reusing lower layers saves massive amounts of compute time, as the network can repurpose pre-learned feature patterns instead of training from scratch.
+
+
+---
+
+# E). PyTorch and CUDA — Digit MNIST Implementation
+
+This section documents the PyTorch implementation added to the project. The earlier sections above are retained as they were; this section supplements the existing TensorFlow/Keras material with a PyTorch-based MNIST workflow and GPU-aware training utilities.
+
+## 1. Project Objectives
+
+- Implement handwritten-digit classification using **PyTorch** and the **MNIST** dataset.
+- Define neural-network architectures explicitly with `torch.nn.Module`, making the layer structure and parameter initialization visible.
+- Support execution on CUDA-capable NVIDIA GPUs when the installed PyTorch build and hardware support CUDA, with CPU fallback where configured.
+- Compare a standard dense neural network with a Low-Rank Adaptation (**LoRA**) variant.
+- Track experiment configuration, evaluation metrics, selected models, and model artifacts through the project's experiment/deployment workflow.
+
+## 2. Data Preparation and Tensor Shapes
+
+The implementation uses the MNIST dataset of grayscale handwritten digits. Each image is \(28 \times 28\) pixels and belongs to one of ten classes, from 0 through 9.
+
+The data pipeline uses `torchvision.datasets.MNIST`, transforms, and `DataLoader` batches. When normalization is enabled, the transform uses the commonly used MNIST statistics:
+
+```python
+transforms.Normalize((0.1307,), (0.3081,))
+```
+
+A batch of 64 images has shape:
+
+- Images: `torch.Size([64, 1, 28, 28])`
+- Labels: `torch.Size([64])`
+
+The image tensor includes a channel dimension because the images are grayscale. The dense network flattens each image from \(1 \times 28 \times 28\) into a vector of 784 input features.
+
+## 3. PyTorch Model Architecture
+
+### Architecture A: Dense MLP — `PytorchTensorDigitMist`
+
+The dense model is implemented as a class derived from `torch.nn.Module`. Its main stages are:
+
+```text
+MNIST image (1 × 28 × 28)
+        |
+      Flatten
+        |
+Linear: 784 → hidden
+        |
+Linear: hidden → hidden // 2
+        |
+Linear: hidden // 2 → 10
+        |
+Class logits for digits 0–9
+```
+
+The model uses configurable hidden-layer size, bias settings, and weight initialization. The output layer produces ten logits, one for each digit class. During classification, the predicted class is typically selected using the largest logit; a softmax transformation can be applied when class probabilities are needed.
+
+With `hidden=300`, the layer dimensions are `784 → 300 → 150 → 10`. For a model with biases enabled, this architecture has 282,160 parameters.
+
+### Architecture B: LoRA-enabled MLP — `PytorchTensorDigitMistLoRA`
+
+The LoRA variant extends the dense model and replaces its linear layers with LoRA-enabled linear layers from `loralib`. LoRA introduces low-rank trainable updates to the linear transformations, providing an alternative parameter-efficient adaptation approach.
+
+The LoRA rank is configurable (default rank 8 in the model factory). The standard MLP and LoRA-enabled MLP can therefore be compared using a consistent overall task and layer layout.
+
+### Model factory — `TensorModels`
+
+The `TensorModels(...)` factory creates the selected model and returns a configuration dictionary. The documented configuration options include:
+
+- `KERNEL_INIT`: weight initialization strategy.
+- `hidden`: hidden-layer width.
+- `use_bias`: whether linear layers use bias parameters.
+- `lora_uses`: whether to create the LoRA variant.
+- `lora_rank`: rank used by LoRA layers.
+
+The supported initialization names in the implementation are `GlorotNormal`, `GlorotUniform`, `HeNormal`, and `HeUniform`. The factory validates and normalizes initialization names before constructing the model.
+
+## 4. Training, CUDA, and Numerical Utilities
+
+The implementation uses PyTorch's tensor operations, autograd, and optimizer workflow for forward computation and gradient-based learning. Where CUDA is available, the model and input batches can be moved to the selected CUDA device. Otherwise, the run can use the CPU if the surrounding code supports fallback.
+
+CUDA availability depends on the installed PyTorch build, NVIDIA driver, and compatible GPU. A CUDA-capable driver alone does not guarantee that `torch.cuda.is_available()` will return `True`.
+
+Typical device selection is:
+
+```python
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+model = model.to(device)
+```
+
+Training utilities in the notebook also include support helpers for automatic mixed precision (AMP), gradient scaling compatibility, and DataLoader handling. Mixed precision can reduce memory use and improve throughput on supported hardware, but its actual benefit depends on the GPU, model, and workload.
+
+## 5. Evaluation and Experiment Tracking
+
+The PyTorch workflow is designed to evaluate the trained classifier and report model performance through the application interface rather than relying only on console output. The experiment workflow also integrates with MLflow for tracking and model management.
+
+The intended tracking split is:
+
+- **Parameters:** input/configuration choices supplied through the Gradio interface, such as model selection and model/training settings.
+- **Metrics and report:** output-side evaluation results and a readable summary displayed in the Gradio interface.
+- **Artifacts:** selected models and other relevant outputs produced by the run.
+- **Model registry:** the registered model name used by this project is `Digit Mist Pytorch Cuda`.
+
+Exact metric names and values depend on the current experiment run; this README does not claim benchmark results that have not been supplied.
+
+## 6. Application and Deployment Workflow
+
+The project workflow connects the model experiment to a Gradio interface and MLflow tracking/model registration. At a high level:
+
+1. Select the model and experiment settings in the Gradio UI.
+2. Create the selected PyTorch model.
+3. Prepare MNIST batches and train/evaluate the model.
+4. Record input parameters, output metrics, and artifacts in MLflow.
+5. Display a summary report in the UI.
+6. Register and retrieve the model using the project's MLflow model-registry configuration.
+
+Deployment environments must have compatible Python, PyTorch, and CUDA components if GPU execution is required. A CPU-only environment can still run only if the application and installed dependencies support CPU execution.
+
+## 7. Purpose of the PyTorch Addition
+
+This addition complements the existing Keras/TensorFlow tutorials with a lower-level PyTorch implementation. It makes model construction, parameter initialization, device placement, training utilities, LoRA configuration, experiment tracking, and deployment integration explicit, while keeping the original DigitMNIST, Fashion-MNIST, NeuralTutorials, and TensorFlowTutorials descriptions in place.
+
